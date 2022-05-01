@@ -81,15 +81,15 @@ https://www.kaggle.com/datasets/sidtwr/videogames-sales-dataset
 
 - How was the data collected or generated? Make sure to explain who collected the data (not necessarily the same people that host the data), and who or what the data is about?
 
-The data set was collected from **VGChartz Video Games Sales** with an extension of the number of variables from another web scrape from **Metacritic**. VGChartz is a video game sales tracking websites provides weekly sales data based on estimates extrapolated from small retail samples. Metacritic website is an review aggregation website wining by two Webby Awards for its excellence as an aggregation website.The dataset covers 1031 different games’ sales by situations, including names, platforms, year of releases, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, and Global_Sales.
+The data set was collected from **VGChartz Video Games Sales** with an extension of the number of variables from another web scrape from **Metacritic**. VGChartz is a video game sales tracking websites provides weekly sales data based on estimates extrapolated from small retail samples. Metacritic website is a review aggregation website wining by two Webby Awards for its excellence as an aggregation website.The dataset covers 1031 different Video Games sales situation on the Playstation 4 platform by Sony, including names, platforms, year of releases, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, and Global_Sales.
 
 - How many observations (rows) are in your data?
 
-1034 observations in the dataset
+1034 observations in the dataset which respectively which represent 1034 different Video Games on the Sony Playstation 4 platform.
 
 - How many features (columns) are in the data?
 
-There are 9 features in the dataset.
+There are 9 features in the dataset which respectively represent the games' names, platforms, year of releases, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, and Global_Sales.
 
 - What questions (from above) can be answered using the data in this dataset?
 
