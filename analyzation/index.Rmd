@@ -1,0 +1,52 @@
+---
+title: "Exploratory Data Analysis"
+output: html_document
+author: Liuyixin Shao, Wenqi Xue, Yundi Gao, Tongxi Cui
+date: '2022-05-20'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+```{r, include=FALSE}
+source("chart2.R")
+source("sales_by_yearRelease.r")
+```
+
+
+# Introduction
+
+We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on **sports games sales**.      
+We found this dataset that includes all the variables related to our interest: global sports games sales by platform (`Global_Sales`,`Platform` ), year of release (`Year_of_Release`), and different countries (`NA_Sales`, `EU_Sales`, `JP_Salse`, `Other_Sales`).      
+
+# Summary Information
+
+
+# Table of Summary Information
+
+
+# Chart 1
+First, we want to find out the sales percentage of sports genres of each _region_ labeled in the dataset.     
+```{r, echo = FALSE}
+
+```
+This pie chart displays the sales percentage of sports genres of each region labeled in the dataset. Each color in the chart represents a region. It is clear that Europe has the most sales in sports video games, followed by North America, the Rest of the World, and Japan. The chart demonstrates the distribution of sports video game sales.       
+
+# Chart 2
+Here, we want to explore the sport game sales on different _platforms_. We build a column chart to show the sales.    
+           
+```{r, echo = FALSE}
+chart_2
+```
+This column chart evals the relationship between platforms and sports game sales. According to this chart, with 288.61 million total sales, Wii is the highest selling platform for sports games. PS2 is the second-highest selling platform, with 273.41 million overall sales. The total game sales in both platforms take about 42.19 % of the sales in the overall platforms.        
+
+# Chart 3
+The purpose we include this connected scatter chart because it helps us explore the relationship between the global Sports Game sales on December 22, 2016 and the _year of release_.      
+```{r, echo = FALSE}
+
+```
+The observation in the chart is that games released in 2019 seem to be sold the best on December 22, 2016. This observation is clear due to the sales of games released in 2009 were significant compared to games released in other years. The contrast is prominent, as even the first sales (game released in 2009) is nearly 1.25 times higher than the second sales (game released in 2007).         
+
+
+
