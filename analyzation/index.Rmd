@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ```{r, include=FALSE}
 source("chart2.R")
-source("sales_by_yearRelease.r")
+source("sales_by_year_release.r")
+#source("pie_chart.R")
+source("Table_Variables.R")
 ```
 
 
@@ -21,31 +23,62 @@ We are all video game lovers. Among all, sports are such a fun genre that we can
 We found this dataset that includes all the variables related to our interest: global sports games sales by platform (`Global_Sales`,`Platform` ), year of release (`Year_of_Release`), and different countries (`NA_Sales`, `EU_Sales`, `JP_Salse`, `Other_Sales`).      
 
 # Summary Information
+In our group project, we used a dataset that records relevant data about **games’ sales** between 1980 - 2016. And by using this dataset, we created three charts, found five variables, and created a table that includes data that we are interested in.       
+The first chart we create displays the sales percentage of sports genres of each region labeled in the dataset. Plus, areas are differentiated by different colors. The second chart is a column type chart that shows the sales data of sports games on different platforms. The last chart explores the relationship between the global Sports Game sales on December 22, 2016, and the year of release.           
+Other than these three charts, we calculated five variables: **JapanSaleTotal**, **NASaleTotal**, **globalSaleTotal**, **Amount_of_Nietendo_Published_games**, **published_games_in_total**. And they respectively represent the total amount of game sales in Japan, the total amount of game sales in North America, the total amount of game sales globally, the amount of the games that Nintendo has published, and the total number of published games (all these variables can only represent results between 1980 to 2016).                   
+Besides what’s described above, the table we create has five columns in total, representing what we are interested in about the dataset. In the table, we record the genre of the games and find out which game in their genre has the highest sale record and who their publishers are. We also include the user rate to see if sales will affect the user rate.   
+      
+- The total amount of game sales in Japan
+```{r, echo = FALSE}
+JapanSaleTotal
+```
+- The total amount of game sale in North America
+```{r, echo = FALSE}
+NASaleTotal
+```
+- The total amount of game sales globally
+```{r, echo = FALSE}
+globalSaleTotal
+```
+- The amount the of the games that Nietendo has published   
+```{r, echo = FALSE}
+Amount_of_Nietendo_Published_games
+```
+- Total published games
+```{r, echo = FALSE}
+published_games_in_total
+```
 
-
+ 
 # Table of Summary Information
+```{r, echo = FALSE}
+table
+```
 
 
-# Chart 1
+## Chart 1
 First, we want to find out the sales percentage of sports genres of each _region_ labeled in the dataset.     
 ```{r, echo = FALSE}
-
+#chart_1
 ```
+                           
 This pie chart displays the sales percentage of sports genres of each region labeled in the dataset. Each color in the chart represents a region. It is clear that Europe has the most sales in sports video games, followed by North America, the Rest of the World, and Japan. The chart demonstrates the distribution of sports video game sales.       
 
-# Chart 2
+## Chart 2
 Here, we want to explore the sport game sales on different _platforms_. We build a column chart to show the sales.    
            
 ```{r, echo = FALSE}
 chart_2
 ```
+       
 This column chart evals the relationship between platforms and sports game sales. According to this chart, with 288.61 million total sales, Wii is the highest selling platform for sports games. PS2 is the second-highest selling platform, with 273.41 million overall sales. The total game sales in both platforms take about 42.19 % of the sales in the overall platforms.        
 
-# Chart 3
+## Chart 3
 The purpose we include this connected scatter chart because it helps us explore the relationship between the global Sports Game sales on December 22, 2016 and the _year of release_.      
 ```{r, echo = FALSE}
-
+plot
 ```
+                     
 The observation in the chart is that games released in 2019 seem to be sold the best on December 22, 2016. This observation is clear due to the sales of games released in 2009 were significant compared to games released in other years. The contrast is prominent, as even the first sales (game released in 2009) is nearly 1.25 times higher than the second sales (game released in 2007).         
 
 

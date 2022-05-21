@@ -1,10 +1,10 @@
 library(tidyverse)
 
 
-game <- read.csv("video.csv")
+game <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 summary_info <- list()
 
- 
+
 #the total amount of game sales in Japan
 JapanSaleTotal <- sum(game$JP_Sales)
 
@@ -19,12 +19,9 @@ Amount_of_Nietendo_Published_games <- sum((game$Publisher == "Nintendo"))
 
 #and total published games
 published_games_in_total <- nrow(game)
- 
-  
+
+
 table <- game %>% group_by(Genre) %>% na.omit() %>% summarize(Name = Name[max_sales = max(Global_Sales)], 
-                                                max_sales = max(Global_Sales), 
-                                                User_Rate = max(User_Score), 
-                                                Publisher = Publisher[User_Rate = max(User_Score)])
-
-
-
+                                                              max_sales = max(Global_Sales), 
+                                                              User_Rate = max(User_Score), 
+                                                              Publisher = Publisher[User_Rate = max(User_Score)])
