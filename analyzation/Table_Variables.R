@@ -21,10 +21,10 @@ Amount_of_Nietendo_Published_games <- sum((game$Publisher == "Nintendo"))
 published_games_in_total <- nrow(game)
  
   
-table <- game %>% group_by(Genre) %>% summarize(Name == Name[max_sales = max(Global_Sales)], 
+table <- game %>% group_by(Genre) %>% na.omit() %>% summarize(Name = Name[max_sales = max(Global_Sales)], 
                                                 max_sales = max(Global_Sales), 
-                                                User_Rate = max(User_Rate), 
-                                                Publisher == Publisher[max_sales = max(Global_Sales)])
+                                                User_Rate = max(User_Score), 
+                                                Publisher = Publisher[User_Rate = max(User_Score)])
 
 
 
