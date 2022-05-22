@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ```{r, include=FALSE}
 source("chart2.R")
 source("sales_by_year_release.r")
-#source("pie_chart.R")
+source("pie_chart.R")
 source("Table_Variables.R")
 ```
 
@@ -59,7 +59,7 @@ table
 ## Chart 1
 First, we want to find out the sales percentage of sports genres of each _region_ labeled in the dataset.     
 ```{r, echo = FALSE}
-#chart_1
+chart_1
 ```
                            
 This pie chart displays the sales percentage of sports genres of each region labeled in the dataset. Each color in the chart represents a region. It is clear that Europe has the most sales in sports video games, followed by North America, the Rest of the World, and Japan. The chart demonstrates the distribution of sports video game sales.       
