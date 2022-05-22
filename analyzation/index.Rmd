@@ -62,7 +62,7 @@ First, we want to find out the sales percentage of sports genres of each _region
 chart_1
 ```
                            
-This pie chart displays the sales percentage of sports genres of each region labeled in the dataset. Each color in the chart represents a region. It is clear that Europe has the most sales in sports video games, followed by North America, the Rest of the World, and Japan. The chart demonstrates the distribution of sports video game sales.       
+This pie chart displays the sales percentage of sports genres of each region labeled in the dataset. Each color in the chart represents a region. It is clear that North America has the most sales in sports video games, followed by Europe. Japan and rest of world have roughly identical sales. The chart demonstrates the distribution of sports video game sales worldwide.       
 
 ## Chart 2
 Here, we want to explore the sport game sales on different _platforms_. We build a column chart to show the sales.    
