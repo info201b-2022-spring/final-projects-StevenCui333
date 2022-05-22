@@ -2,7 +2,7 @@
 title: "Exploratory Data Analysis"
 output: html_document
 author: Liuyixin Shao, Wenqi Xue, Yundi Gao, Tongxi Cui
-date: '2022-05-20'
+date: '2022-05-22'
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +14,7 @@ source("chart2.R")
 source("sales_by_year_release.r")
 source("pie_chart.R")
 source("Table_Variables.R")
+source("summary info.R")
 ```
 
 
@@ -26,7 +27,6 @@ We found this dataset that includes all the variables related to our interest: g
 In our group project, we used a dataset that records relevant data about **games’ sales** between 1980 - 2016. And by using this dataset, we created three charts, found five variables, and created a table that includes data that we are interested in.       
 The first chart we create displays the sales percentage of sports genres of each region labeled in the dataset. Plus, areas are differentiated by different colors. The second chart is a column type chart that shows the sales data of sports games on different platforms. The last chart explores the relationship between the global Sports Game sales on December 22, 2016, and the year of release.           
 Other than these three charts, we calculated five variables: **JapanSaleTotal**, **NASaleTotal**, **globalSaleTotal**, **Amount_of_Nietendo_Published_games**, **published_games_in_total**. And they respectively represent the total amount of game sales in Japan, the total amount of game sales in North America, the total amount of game sales globally, the amount of the games that Nintendo has published, and the total number of published games (all these variables can only represent results between 1980 to 2016).                   
-Besides what’s described above, the table we create has five columns in total, representing what we are interested in about the dataset. In the table, we record the genre of the games and find out which game in their genre has the highest sale record and who their publishers are. We also include the user rate to see if sales will affect the user rate.   
       
 - The total amount of game sales in Japan
 ```{r, echo = FALSE}
@@ -54,7 +54,9 @@ published_games_in_total
 ```{r, echo = FALSE}
 table
 ```
-
+      
+Besides what’s described above, the table we create has five columns in total, representing what we are interested in about the dataset. In the table, we record the genre of the games and find out which game in their genre has the highest sale record and who their publishers are. We also include the user rate to see if sales will affect the user rate.  
+According to the table, with **82.5 millions** total sales in the world, _Mario Sports Mix_ has the largest sales in Sports Genre and among the total Genres. Sports is indeed a popular game category.     
 
 ## Chart 1
 First, we want to find out the sales percentage of sports genres of each _region_ labeled in the dataset.     
