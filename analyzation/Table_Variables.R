@@ -2,7 +2,6 @@ library(tidyverse)
 
 
 game <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
-summary_info <- list()
 
 
 #the total amount of game sales in Japan
@@ -21,6 +20,9 @@ Amount_of_Nietendo_Published_games <- sum((game$Publisher == "Nintendo"))
 published_games_in_total <- nrow(game)
 
 
+#The table is grouped by the Genre of the games, 
+#and find out which game in their genre have the highest sale record, who are their publishers. 
+#We also include the user rate to see if sales will affect the user rate.
 table <- game %>% group_by(Genre) %>% na.omit() %>% summarize(Name = Name[max_sales = max(Global_Sales)], 
                                                               max_sales = max(Global_Sales), 
                                                               User_Rate = max(User_Score), 
