@@ -18,6 +18,21 @@ about <- tabPanel(
   "About"
 )
 
+
+Intro_Page <- tabPanel(  titlePanel("Introduction"),
+                         sidebarLayout(
+                           sidebarPanel(
+                             p("
+We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports games sales.
+We found this dataset that includes all the variables related to our interest: global sports games sales by platform, year of release, and different countries.
+", style = "font-family: 'times'; font-si16pt")
+                           ),
+                           mainPanel(
+                             img(src = "yes.jpg", height = 140, width = 400)
+                           )
+                         )
+)
+
 # Chart 1 page
 ## wrangling data
 data <- data %>%na.omit(data)%>%
@@ -37,7 +52,7 @@ chart_1_page <- tabPanel(
   sidebarLayout(
     sidebarPanel(
       h5("Controls"),
-      numericInput(inputId = "num", label = h3("Started Year"), value = 1998, min = 1998),
+      numericInput(inputId = "num", label = h3("Started Year"), value = 2007, min = 2007),
       numericInput(inputId = "num2", label = h3("End Year"), value = 2016, max = 2016)
     ),
     mainPanel(
@@ -74,6 +89,7 @@ chart_2_page <- tabPanel(
 
 ui <- navbarPage(
   "Covid Cases and Vaccinations",
+  Intro_Page,
   chart_1_page,
   chart_2_page
 )
