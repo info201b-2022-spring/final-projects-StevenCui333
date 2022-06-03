@@ -33,12 +33,12 @@ Sports_df[] <- lapply(Sports_df, as.numeric)
 
 chart_1_page <- tabPanel(
   "First Page",
-  titlePanel("sales by year release"),
+  titlePanel("Sports Sales by year release"),
   sidebarLayout(
     sidebarPanel(
       h5("Controls"),
-      numericInput(inputId = "num", label = h3("Numeric input"), value = 1998, min = 1998),
-      numericInput(inputId = "num2", label = h3("Numeric input"), value = 2016, max = 2016)
+      numericInput(inputId = "num", label = h3("Started Year"), value = 1998, min = 1998),
+      numericInput(inputId = "num2", label = h3("End Year"), value = 2016, max = 2016)
     ),
     mainPanel(
       plotOutput(outputId = "plot", brush = "plot_brush"),
