@@ -13,13 +13,8 @@ video_game_df <- data
 # Get country names
 #countries <- data.frame(unique(covid_data$iso_code[covid_data$continent != ""]))
 
-# About page
-about <- tabPanel(
-  "About"
-)
-
-
-Intro_Page <- tabPanel(  titlePanel("Introduction"),
+Intro_Page <- tabPanel(  "Introduction",
+                         titlePanel("Introduction"),
                          sidebarLayout(
                            sidebarPanel(
                              p("
@@ -51,7 +46,7 @@ chart_1_page <- tabPanel(
   titlePanel("Sports Sales by year release"),
   sidebarLayout(
     sidebarPanel(
-      h5("Controls"),
+      h4("Controls"),
       numericInput(inputId = "num", label = h3("Started Year"), value = 2007, min = 2007),
       numericInput(inputId = "num2", label = h3("End Year"), value = 2016, max = 2016)
     ),
@@ -88,7 +83,7 @@ chart_2_page <- tabPanel(
 )
 
 ui <- navbarPage(
-  "Covid Cases and Vaccinations",
+  "Video Games Sales",
   Intro_Page,
   chart_1_page,
   chart_2_page
@@ -103,7 +98,9 @@ server <- function(input, output) {
       ggplot( aes(x=Year_of_Release, y=Sports_sales)) +
       geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
       xlim(input$num, input$num2)+
-      ggtitle("Global Sports Games Sales by different year of release ") + labs(y = "Sports_sales(in millions)")
+      ggtitle("Global Sports Games Sales by different year of release ") + 
+      labs(x = "Year of Release",
+           y = "Sports sales(in millions)")
     
   })
   
