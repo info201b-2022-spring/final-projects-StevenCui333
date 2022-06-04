@@ -2,17 +2,15 @@ library("shiny")
 library("dplyr")
 library("ggplot2")
 library("plotly")
-
+library("bslib")
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 video_game_df <- data
-# Get continent names
-#continents <- data.frame(unique(covid_data$continent[covid_data$continent != ""]))
 
-# Get country names
-#countries <- data.frame(unique(covid_data$iso_code[covid_data$continent != ""]))
+# add a theme
 
+<<<<<<< HEAD
 # About page
 about <- tabPanel(
   "About"
@@ -21,6 +19,11 @@ about <- tabPanel(
 
 #introduction
 Summ_Page <- tabPanel(  titlePanel("Introduction"),
+=======
+# intro page
+Intro_Page <- tabPanel(  "Introduction",
+                         titlePanel("Introduction"),
+>>>>>>> 7e7776f365a6822b9b7f14187c5da2a6c0890341
                          sidebarLayout(
                            sidebarPanel(
                              p("
@@ -73,15 +76,16 @@ Sports_df[] <- lapply(Sports_df, as.numeric)
 
 chart_1_page <- tabPanel(
   "First Page",
-  titlePanel("Sports Sales by year release"),
+  titlePanel("Global Sports Games Sales by Different Year of Release"),
   sidebarLayout(
     sidebarPanel(
-      h5("Controls"),
+      h4("Controls"),
       numericInput(inputId = "num", label = h3("Started Year"), value = 2007, min = 2007),
       numericInput(inputId = "num2", label = h3("End Year"), value = 2016, max = 2016)
     ),
     mainPanel(
       plotOutput(outputId = "plot", brush = "plot_brush"),
+      textOutput(outputId = "text"),
       tableOutput(outputId = "data"),
     )
   )
@@ -113,7 +117,11 @@ chart_2_page <- tabPanel(
 )
 
 ui <- navbarPage(
-  "Covid Cases and Vaccinations",
+  theme = bs_theme(bootswatch = "minty",
+                   bg = "#e7feff", fg = "black", primary = "#3f00ff",
+                   base_font = font_google("Space Mono"),
+                   code_font = font_google("Space Mono")),
+  "Video Games Sales",
   Intro_Page,
   chart_1_page,
   chart_2_page,
@@ -127,15 +135,21 @@ server <- function(input, output) {
     Sports_df%>%
       tail(10) %>%
       ggplot( aes(x=Year_of_Release, y=Sports_sales)) +
-      geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
-      xlim(input$num, input$num2)+
-      ggtitle("Global Sports Games Sales by different year of release ") + labs(y = "Sports_sales(in millions)")
+      geom_point(shape=21, color="black", fill="#3f00ff", size=6) +
+      xlim(input$num, input$num2) + 
+      labs(x = "Year of Release",
+           y = "Sports Sales (in millions)")
     
   })
   
+  output$text <- renderText({
+    paste("Note: Brush the plot to see the value of the circled points in the table below")
+  })
+    
   output$data <- renderTable({
     brushedPoints(Sports_df, input$plot_brush)%>%
-      rename("Sports sales (in millions)" = Sports_sales)
+      rename("Sports Sales (in millions)" = Sports_sales) %>%
+      rename("Year of Release" = Year_of_Release)
   })
   
   # chart 2 
@@ -152,6 +166,7 @@ server <- function(input, output) {
       filter(Platform %in% c(input$checkGroup))
     plot_ly(data = filtered_sports_df, 
             x = ~Platform, y = ~sum_total, 
+            marker = list(color = "#3f00ff"),
             type = "bar"
     ) %>% layout (yaxis = list(title = 'Total Sales (in millions)'))
   })
