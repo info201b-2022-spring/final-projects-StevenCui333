@@ -2,17 +2,15 @@ library("shiny")
 library("dplyr")
 library("ggplot2")
 library("plotly")
-
+library("bslib")
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 video_game_df <- data
-# Get continent names
-#continents <- data.frame(unique(covid_data$continent[covid_data$continent != ""]))
 
-# Get country names
-#countries <- data.frame(unique(covid_data$iso_code[covid_data$continent != ""]))
+# add a theme
 
+# intro page
 Intro_Page <- tabPanel(  "Introduction",
                          titlePanel("Introduction"),
                          sidebarLayout(
@@ -84,6 +82,10 @@ chart_2_page <- tabPanel(
 )
 
 ui <- navbarPage(
+  theme = bs_theme(bootswatch = "minty",
+                   bg = "#e7feff", fg = "black", primary = "#3f00ff",
+                   base_font = font_google("Space Mono"),
+                   code_font = font_google("Space Mono")),
   "Video Games Sales",
   Intro_Page,
   chart_1_page,
@@ -97,7 +99,7 @@ server <- function(input, output) {
     Sports_df%>%
       tail(10) %>%
       ggplot( aes(x=Year_of_Release, y=Sports_sales)) +
-      geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+      geom_point(shape=21, color="black", fill="#3f00ff", size=6) +
       xlim(input$num, input$num2) + 
       labs(x = "Year of Release",
            y = "Sports Sales (in millions)")
@@ -128,6 +130,7 @@ server <- function(input, output) {
       filter(Platform %in% c(input$checkGroup))
     plot_ly(data = filtered_sports_df, 
             x = ~Platform, y = ~sum_total, 
+            marker = list(color = "#3f00ff"),
             type = "bar"
     ) %>% layout (yaxis = list(title = 'Total Sales (in millions)'))
   })
