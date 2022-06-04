@@ -2,6 +2,7 @@ library("shiny")
 library("dplyr")
 library("ggplot2")
 library("plotly")
+library("ECharts2Shiny")
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 video_game_df <- data
@@ -50,9 +51,21 @@ The first chart we create displays the sales percentage of sports genres of each
                         )
 )
 
-
-
 # Chart 1 page
+sports_by_area <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv") %>%
+  filter(Genre == 'Sports')
+value <- apply(sports_by_area[,c(6,7,8,9)], 2, sum)
+data <- data.frame(value, name = c('North America', 'Europe', 'Japan', 'Rest of World'))
+
+ui <- fluidPage(
+  loadEChartsLibrary(),
+  tags$div(id = "piechart", style = "width:80%; height:400px;"),
+  deliverChart(div_id = "piechart")
+)
+
+server <- function(input, output) {
+
+# Chart 2 page
 ## wrangling data
 data <- data %>%na.omit(data)%>%
   arrange(Year_of_Release)%>%
@@ -78,7 +91,7 @@ chart_1_page <- tabPanel(
     )
   )
 )
-# Chart 2 page
+# Chart 3 page
 sports_df <- video_game_df %>% 
   filter(Genre == "Sports") %>% 
   group_by(Platform) %>% 
@@ -111,7 +124,10 @@ ui <- navbarPage(
 )
 
 server <- function(input, output) {
-  # chart 1 
+  # chart 1
+  renderPieChart(div_id = "piechart", data = data)
+}
+  # chart 2
   output$plot <- renderPlot({
     Sports_df%>%
       tail(10) %>%
@@ -127,7 +143,7 @@ server <- function(input, output) {
       rename("Sports sales (in millions)" = Sports_sales)
   })
   
-  # chart 2 
+  # chart 3
   output$table <- renderTable({
     #return(filter(char_df, Character == input$char))
     nearPoints(sports_df,input$plot_hover, xvar = "Platform",
