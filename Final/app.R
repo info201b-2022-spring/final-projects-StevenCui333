@@ -43,7 +43,7 @@ Sports_df[] <- lapply(Sports_df, as.numeric)
 
 chart_1_page <- tabPanel(
   "First Page",
-  titlePanel("Sports Sales by year release"),
+  titlePanel("Global Sports Games Sales by Different Year of Release"),
   sidebarLayout(
     sidebarPanel(
       h4("Controls"),
@@ -52,6 +52,7 @@ chart_1_page <- tabPanel(
     ),
     mainPanel(
       plotOutput(outputId = "plot", brush = "plot_brush"),
+      textOutput(outputId = "text"),
       tableOutput(outputId = "data"),
     )
   )
@@ -97,16 +98,20 @@ server <- function(input, output) {
       tail(10) %>%
       ggplot( aes(x=Year_of_Release, y=Sports_sales)) +
       geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
-      xlim(input$num, input$num2)+
-      ggtitle("Global Sports Games Sales by different year of release ") + 
+      xlim(input$num, input$num2) + 
       labs(x = "Year of Release",
-           y = "Sports sales(in millions)")
+           y = "Sports Sales (in millions)")
     
   })
   
+  output$text <- renderText({
+    paste("Note: Brush the plot to see the value of the circled points in the table below")
+  })
+    
   output$data <- renderTable({
     brushedPoints(Sports_df, input$plot_brush)%>%
-      rename("Sports sales (in millions)" = Sports_sales)
+      rename("Sports Sales (in millions)" = Sports_sales) %>%
+      rename("Year of Release" = Year_of_Release)
   })
   
   # chart 2 
