@@ -10,20 +10,15 @@ video_game_df <- data
 
 # add a theme
 
-<<<<<<< HEAD
 # About page
 about <- tabPanel(
   "About"
 )
 
 
-#introduction
-Summ_Page <- tabPanel(  titlePanel("Introduction"),
-=======
 # intro page
-Intro_Page <- tabPanel(  "Introduction",
+Intro_Page <- tabPanel( "Introduction",
                          titlePanel("Introduction"),
->>>>>>> 7e7776f365a6822b9b7f14187c5da2a6c0890341
                          sidebarLayout(
                            sidebarPanel(
                              p("
@@ -39,7 +34,7 @@ We found this dataset that includes all the variables related to our interest: g
 
 
 #Summary
-Intro_Page <- tabPanel(  titlePanel("Summary"),
+Summ_Page <- tabPanel(  "Summary", titlePanel("Summary"),
                          sidebarLayout(
                            sidebarPanel(
                              p("
