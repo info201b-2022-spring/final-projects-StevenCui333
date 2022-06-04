@@ -19,12 +19,32 @@ about <- tabPanel(
 )
 
 
-Intro_Page <- tabPanel(  titlePanel("Introduction"),
+#introduction
+Summ_Page <- tabPanel(  titlePanel("Introduction"),
                          sidebarLayout(
                            sidebarPanel(
                              p("
 We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports games sales.
 We found this dataset that includes all the variables related to our interest: global sports games sales by platform, year of release, and different countries.
+", style = "font-family: 'times'; font-si10pt")
+                           ),
+                           mainPanel(
+                             img(src = "yes.jpg", height = 140, width = 400)
+                           )
+                         )
+)
+
+
+#Summary
+Intro_Page <- tabPanel(  titlePanel("Summary"),
+                         sidebarLayout(
+                           sidebarPanel(
+                             p("
+In our group project, we used a dataset that records  relevant data about games¡¯ sales between 1980 - 2016. And by using this dataset, we created three charts, find 5 variable and a table that includes data that we are interested in.
+The first chart we create displays the sales percentage of sports genres of each region labeled in the dataset.And regions are differentiated by different colors. The second chart is a column type chart which shows the sale data of sport games in different platform. For the last chart, it explores the relationship between the global Sports Game sales on December 22, 2016 and the year of release. 
+Other than these three charts, we calculated five variables: JapanSaleTotal, NASaleTotal, globalSaleTotal, Amount_of_Nietendo_Published_games, published_games_in_total. And they respectively represent, the total amount of game sales in Japan, the total amount of game sale in North America, the total amount of game sales globally, the amount the of the games that Nietendo has published, and total published games. (All these variables, can only represent results between 1980 to 2016)
+Beside what¡¯s described above, the table we create has 5 column in total which respectively represent what we are interested in about the dataset. In the table we record the Genere of the games, and find out which game in their genre have the highest sale record, who are their publishers. We also include the user rate to see if sales will affect the user rate.
+
 ", style = "font-family: 'times'; font-si16pt")
                            ),
                            mainPanel(
@@ -32,6 +52,11 @@ We found this dataset that includes all the variables related to our interest: g
                            )
                          )
 )
+
+
+
+
+
 
 # Chart 1 page
 ## wrangling data
@@ -91,7 +116,8 @@ ui <- navbarPage(
   "Covid Cases and Vaccinations",
   Intro_Page,
   chart_1_page,
-  chart_2_page
+  chart_2_page,
+  Summ_Page
 )
 
 
