@@ -30,7 +30,7 @@ We found this dataset that includes all the variables related to our interest: g
 ", style = "font-family: 'times'; font-si16pt")
                           ),
                           mainPanel(
-                            img(src = "ok.jpg", height = 400, width = 800)
+                            img(src = "ok.jpg", height = 600, width = 800)
                           )
                         )
 )
