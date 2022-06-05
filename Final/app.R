@@ -7,7 +7,11 @@ library("bslib")
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 video_game_df <- data
-
+sports_by_area <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv") %>%
+  filter(Genre == 'Sports')
+value <- apply(sports_by_area[,c(6,7,8,9)], 2, sum)
+data111 <- data.frame(value, name = c('North America', 'Europe', 'Japan', 'Rest of World'))
+table_df <- sports_by_area %>% arrange(desc(Global_Sales)) %>% slice_head(n = 10)
 # add a theme
 
 # About page
@@ -25,7 +29,7 @@ We found this dataset that includes all the variables related to our interest: g
 ", style = "font-family: 'times'; font-si16pt")
                           ),
                           mainPanel(
-                            img(src = "ok.jpg", height = 140, width = 400)
+                            img(src = "ok.jpg", height = 400, width = 800)
                           )
                         )
 )
@@ -46,7 +50,7 @@ The first chart we create displays the sales percentage of sports genres of each
                            p("Beside what's described above, the table we create has 5 column in total which respectively represent what we are interested in about the dataset. In the table we record the Genere of the games, and find out which game in their genre have the highest sale record, who are their publishers. We also include the user rate to see if sales will affect the user rate.", style = "font-family: 'times'; font-si16pt")
                          ),
                          mainPanel(
-                           img(src = "yes.jpg", height = 140, width = 400)
+                           img(src = "yes.jpg", height = 400, width = 800)
                          )
                        )
 )
@@ -110,6 +114,26 @@ chart_2_page <- tabPanel(
   )
 )
 
+# chart 3 page 
+chart_3_page <- tabPanel(
+  "Third Page",
+  titlePanel("Sports Genre Sales by Regions"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(inputId = "select", 
+                  label = h4("Select one of the most popular video game from the TOP 10 game list"), 
+                  choices = table_df$Name, 
+                  selected = 1)
+    ),
+    mainPanel(
+      loadEChartsLibrary(),
+      tags$div(id = "piechart", style = "width:80%; height:400px;"),
+      deliverChart(div_id = "piechart"),
+      tableOutput(outputId = 'table1')
+    )
+  )
+)
+
 ui <- navbarPage(
   theme = bs_theme(bootswatch = "minty",
                    bg = "#e7feff", fg = "black", primary = "#3f00ff",
@@ -119,6 +143,7 @@ ui <- navbarPage(
   Intro_Page,
   chart_1_page,
   chart_2_page,
+  chart_3_page,
   Summ_Page
 )
 
@@ -163,6 +188,19 @@ server <- function(input, output) {
             marker = list(color = "#3f00ff"),
             type = "bar"
     ) %>% layout (yaxis = list(title = 'Total Sales (in millions)'))
+  })
+  
+  # chart 3 
+  renderPieChart(div_id = "piechart", data = data111)
+  output$table1 <- renderTable({
+    return(table_df %>% filter(Name == input$select) %>% select(
+      Name, Platform, Year_of_Release, NA_Sales, EU_Sales, JP_Sales, Other_Sales
+    ) %>% rename("Year of Release" = Year_of_Release,
+                 "North America Sales (in millions)" = NA_Sales,
+                 "Europe Sales (in millions)" = EU_Sales,
+                 "Japan Sales (in millions)" = JP_Sales,
+                 "Other Sales (in millions)" = Other_Sales)
+    )
   })
 }
 
