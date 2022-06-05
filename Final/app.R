@@ -3,6 +3,7 @@ library("dplyr")
 library("ggplot2")
 library("plotly")
 library("bslib")
+library("ECharts2Shiny")
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
