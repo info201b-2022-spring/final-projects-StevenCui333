@@ -4,7 +4,10 @@ library("ggplot2")
 library("plotly")
 library("bslib")
 library("ECharts2Shiny")
+<<<<<<< HEAD
 library(rsconnect)
+=======
+>>>>>>> 0aabd783bc7c44d98aa96449a6e437c94397b714
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
@@ -30,6 +33,7 @@ We are all video game lovers. Among all, sports are such a fun genre that we can
 ", style = "font-family: 'times'; font-si16pt")
                           ),
                           mainPanel(
+<<<<<<< HEAD
                             img(src = "ok.jpg", height = 200, width = 400),
                             p("And here are Our major concerns in this project:
 ", style = "font-family: 'times'; font-si16pt"),
@@ -37,6 +41,9 @@ We are all video game lovers. Among all, sports are such a fun genre that we can
 "), style = "font-family: 'times'; font-si16pt"),
                             h6(strong("-- Which platform has the most sales on the sports games?"), style = "font-family: 'times'; font-si16pt"),
                             h6(strong("-- Which place has the largest market share?"), style = "font-family: 'times'; font-si16pt")
+=======
+                            img(src = "ok.jpg", height = 600, width = 800)
+>>>>>>> 0aabd783bc7c44d98aa96449a6e437c94397b714
                           )
                         )
 )
@@ -48,9 +55,13 @@ Summ_Page <- tabPanel( "Summary", titlePanel("Summary"),
                          sidebarPanel(
                            img(src = "vs.jpg", height = 100, width = 200)),
                          mainPanel(
+<<<<<<< HEAD
                            p("In our group project, we used a dataset that records  relevant data about games' sales between 2007 - 2016. And by using this dataset, we created three charts in our shiny app. And we deploy these three charts in three different pages in Shiny.
 The first chart we create displays the sales of global sport games by different year of release between 2007 and 2016. By adjusting the year controls we can minimize the range and spectate exactly how many sport games sales are there in that specific range of years in global. And surprisingly we find out that in 2009 the sport games' sales reached it's peak. Then in second page, we have our chart records the total global sales of sports game in different sales platform. By selecting the platforms that are in the menu we can check the sales of sports game that are made in that platform. And as what we expect and assume when we are discussing this in our team, Wii is the lead in the sport games selling platforms. Finally, we analyze the sales ratio of the top ten sports games in different regions of the world. And we discovered the Northe America has the largest market share.
 ", style = "font-family: 'times'; font-si16pt"),
+=======
+                           img(src = "yes.jpg", height = 400, width = 800)
+>>>>>>> 0aabd783bc7c44d98aa96449a6e437c94397b714
                          )
                        )
 )
