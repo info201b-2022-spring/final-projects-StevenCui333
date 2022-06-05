@@ -4,7 +4,7 @@ library("ggplot2")
 library("plotly")
 library("bslib")
 library("ECharts2Shiny")
-library(rsconnect)
+library("rsconnect")
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
@@ -14,43 +14,43 @@ sports_by_area <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv") %>%
 value <- apply(sports_by_area[,c(6,7,8,9)], 2, sum)
 data111 <- data.frame(value, name = c('North America', 'Europe', 'Japan', 'Rest of World'))
 table_df <- sports_by_area %>% arrange(desc(Global_Sales)) %>% slice_head(n = 10)
-# add a theme
 
-# About page
-about <- tabPanel(
-  "About"
-)
-
-
+# intro page 
 Intro_Page <- tabPanel( "Introduction", titlePanel("Introduction"),
                         sidebarLayout(
                           sidebarPanel(
                             p("
-We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports games sales. And we use the dataset that is found on Kaggle that records different platforms, countries and years' selling data of different games from year 2007 to 2016. Which also included our requesting data: global sports games sales by platform, year of release, and different countries. 
+We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports game sales. And we use the dataset that is found on Kaggle that records different platforms, countries, and years of selling data of different games from the year 2007 to 2016. This also included our requesting data: global sports games sales by platform, year of release, and different countries. 
 ", style = "font-family: 'times'; font-si16pt")
                           ),
                           mainPanel(
-                            img(src = "ok.jpg", height = 200, width = 400),
+                            img(src = "ok.jpg", height = 300, width = 500),
                             p("And here are Our major concerns in this project:
 ", style = "font-family: 'times'; font-si16pt"),
-                            h6(strong("-- What year do sports games sell the most??
+                            h6(strong("-- Sports game released in which year sells the most?
 "), style = "font-family: 'times'; font-si16pt"),
                             h6(strong("-- Which platform has the most sales on the sports games?"), style = "font-family: 'times'; font-si16pt"),
-                            h6(strong("-- Which place has the largest market share?"), style = "font-family: 'times'; font-si16pt"),
+                            h6(strong("-- Which region has the largest market share?"), style = "font-family: 'times'; font-si16pt"),
                           )
                         )
 )
 
 
-
+# summary page 
 Summ_Page <- tabPanel( "Summary", titlePanel("Summary"),
                        sidebarLayout(
                          sidebarPanel(
-                           img(src = "vs.jpg", height = 100, width = 200)),
+                           img(src = "vs.jpg", height = 300, width = 400)),
                          mainPanel(
-                           p("In our group project, we used a dataset that records  relevant data about games' sales between 2007 - 2016. And by using this dataset, we created three charts in our shiny app. And we deploy these three charts in three different pages in Shiny.
-The first chart we create displays the sales of global sport games by different year of release between 2007 and 2016. By adjusting the year controls we can minimize the range and spectate exactly how many sport games sales are there in that specific range of years in global. And surprisingly we find out that in 2009 the sport games' sales reached it's peak. Then in second page, we have our chart records the total global sales of sports game in different sales platform. By selecting the platforms that are in the menu we can check the sales of sports game that are made in that platform. And as what we expect and assume when we are discussing this in our team, Wii is the lead in the sport games selling platforms. Finally, we analyze the sales ratio of the top ten sports games in different regions of the world. And we discovered the Northe America has the largest market share.
+                           p("Our group project used a dataset that records relevant data about games' sales between 2007 - 2016. By using this dataset, we created three charts in our shiny app. Then, we deploy these three charts on three different pages in Shiny. 
 ", style = "font-family: 'times'; font-si16pt"),
+                           p("The first chart we create displays the sales of global sports games in different released years between 2007 and 2016. By adjusting the year controls, we minimize the range and spectate exactly how many sports games sales are there in that specific range of releasing years globally. Surprisingly, we found out that sales reached their peak in the sports games released in 2009.",
+                             style = "font-family: 'times'; font-si16pt"),
+                           p("Then on the second page, we have our chart records the total global sales of sports games on different sales platforms. By selecting the platforms on the menu, we can check and compare the sales of sports games published on these chosen platforms. As we expected, with 288.61 million total sales, Wii is the lead in the sports games selling platforms. PS2 is the second-highest selling platform, with 273.41 million overall sales.",
+                             style = "font-family: 'times'; font-si16pt"),
+                           p("Finally, we analyzed the sales percentage of sports genres of each region labeled in the dataset. We discovered that North America has the largest market share, followed by Europe. The sales of the top ten sports games in different regions of the world can also be found in our analysis. With 41.36 million sales in North America, 28.96 million sales in Europe, 3.77 million sales in Japan, and 8.45 million sales in the rest of the world, Wii Sports is the most popular sports game in the world.",
+                             style = "font-family: 'times'; font-si16pt"),
+                           
                          )
                        )
 )
@@ -73,7 +73,7 @@ Sports_df[] <- lapply(Sports_df, as.numeric)
 ## end of wrangling data
 
 chart_1_page <- tabPanel(
-  "First Page",
+  "Year of Release",
   titlePanel("Global Sports Games Sales by Different Year of Release"),
   sidebarLayout(
     sidebarPanel(
@@ -96,7 +96,7 @@ sports_df <- video_game_df %>%
   summarize(sum_total = sum(Global_Sales))
 
 chart_2_page <- tabPanel(
-  "Second Page",
+  "Platforms",
   titlePanel("Total Global Sales of Sports Game in Different Sales Platforms"),
   sidebarLayout(
     sidebarPanel(
@@ -116,7 +116,7 @@ chart_2_page <- tabPanel(
 
 # chart 3 page 
 chart_3_page <- tabPanel(
-  "Third Page",
+  "Regions",
   titlePanel("Sports Genre Sales by Regions"),
   sidebarLayout(
     sidebarPanel(
@@ -135,6 +135,7 @@ chart_3_page <- tabPanel(
 )
 
 ui <- navbarPage(
+  # add a theme 
   theme = bs_theme(bootswatch = "minty",
                    bg = "black", fg = "white", primary = "#3f00ff",
                    base_font = font_google("Space Mono"),
