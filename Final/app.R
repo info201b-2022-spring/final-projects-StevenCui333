@@ -30,7 +30,7 @@ We are all video game lovers. Among all, sports are such a fun genre that we can
                             h6(strong("-- Sports game released in which year sells the most?
 "), style = "font-family: 'times'; font-si16pt"),
                             h6(strong("-- Which platform has the most sales on the sports games?"), style = "font-family: 'times'; font-si16pt"),
-                            h6(strong("-- Which region has the largest market share?"), style = "font-family: 'times'; font-si16pt"),
+                            h6(strong("-- Which region has the largest market share in sports game?"), style = "font-family: 'times'; font-si16pt"),
                           )
                         )
 )
