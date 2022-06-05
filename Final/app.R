@@ -3,11 +3,17 @@ library("dplyr")
 library("ggplot2")
 library("plotly")
 library("bslib")
+library("ECharts2Shiny")
+library(rsconnect)
 
 # Load data frame
 data <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv")
 video_game_df <- data
-
+sports_by_area <- read.csv("Video_Games_Sales_as_at_22_Dec_2016.csv") %>%
+  filter(Genre == 'Sports')
+value <- apply(sports_by_area[,c(6,7,8,9)], 2, sum)
+data111 <- data.frame(value, name = c('North America', 'Europe', 'Japan', 'Rest of World'))
+table_df <- sports_by_area %>% arrange(desc(Global_Sales)) %>% slice_head(n = 10)
 # add a theme
 
 # About page
@@ -20,12 +26,17 @@ Intro_Page <- tabPanel( "Introduction", titlePanel("Introduction"),
                         sidebarLayout(
                           sidebarPanel(
                             p("
-We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports games sales.
-We found this dataset that includes all the variables related to our interest: global sports games sales by platform, year of release, and different countries.
+We are all video game lovers. Among all, sports are such a fun genre that we can compete against one another in tactical challenges that test our precision, accuracy, and strategy. We enjoy the competitive nature of sports games. Therefore, for this project, we focus our analysis on sports games sales. And we use the dataset that is found on Kaggle that records different platforms, countries and years' selling data of different games from year 2007 to 2016. Which also included our requesting data: global sports games sales by platform, year of release, and different countries. 
 ", style = "font-family: 'times'; font-si16pt")
                           ),
                           mainPanel(
-                            img(src = "ok.jpg", height = 140, width = 400)
+                            img(src = "ok.jpg", height = 200, width = 400),
+                            p("And here are Our major concerns in this project:
+", style = "font-family: 'times'; font-si16pt"),
+                            h6(strong("-- What year do sports games sell the most??
+"), style = "font-family: 'times'; font-si16pt"),
+                            h6(strong("-- Which platform has the most sales on the sports games?"), style = "font-family: 'times'; font-si16pt"),
+                            h6(strong("-- Which place has the largest market share?"), style = "font-family: 'times'; font-si16pt")
                           )
                         )
 )
@@ -35,18 +46,11 @@ We found this dataset that includes all the variables related to our interest: g
 Summ_Page <- tabPanel( "Summary", titlePanel("Summary"),
                        sidebarLayout(
                          sidebarPanel(
-                           p("In our group project, we used a dataset that records relevant data about game's sale between 1960 and 2016. And by using this dataset, we created three charts, find 5 variable and a table that includes data that we are interested in.", style = "font-family: 'times'; font-si16pt"),
-                           p("
-The first chart we create displays the sales percentage of sports genres of each region labeled in the dataset.And regions are differentiated by different colors. The second chart is a column type chart which shows the sale data of sport games in different platform. For the last chart, it explores the relationship between the global Sports Game sales on December 22, 2016 and the year of release. 
-", style = "font-family: 'times'; font-si16pt"),
-                           p("Other than these three charts, we calculated five variables: JapanSaleTotal, NASaleTotal, globalSaleTotal, Amount_of_Nietendo_Published_games, published_games_in_total.
-", style = "font-family: 'times'; font-si16pt"),
-                           p(" And they respectively represent, the total amount of game sales in Japan, the total amount of game sale in North America, the total amount of game sales globally, the amount the of the games that Nietendo has published, and total published games. (All these variables, can only represent results between 1980 and 2016)
-", style = "font-family: 'times'; font-si16pt" ),
-                           p("Beside what's described above, the table we create has 5 column in total which respectively represent what we are interested in about the dataset. In the table we record the Genere of the games, and find out which game in their genre have the highest sale record, who are their publishers. We also include the user rate to see if sales will affect the user rate.", style = "font-family: 'times'; font-si16pt")
-                         ),
+                           img(src = "vs.jpg", height = 100, width = 200)),
                          mainPanel(
-                           img(src = "yes.jpg", height = 140, width = 400)
+                           p("In our group project, we used a dataset that records  relevant data about games' sales between 2007 - 2016. And by using this dataset, we created three charts in our shiny app. And we deploy these three charts in three different pages in Shiny.
+The first chart we create displays the sales of global sport games by different year of release between 2007 and 2016. By adjusting the year controls we can minimize the range and spectate exactly how many sport games sales are there in that specific range of years in global. And surprisingly we find out that in 2009 the sport games' sales reached it's peak. Then in second page, we have our chart records the total global sales of sports game in different sales platform. By selecting the platforms that are in the menu we can check the sales of sports game that are made in that platform. And as what we expect and assume when we are discussing this in our team, Wii is the lead in the sport games selling platforms. Finally, we analyze the sales ratio of the top ten sports games in different regions of the world. And we discovered the Northe America has the largest market share.
+", style = "font-family: 'times'; font-si16pt"),
                          )
                        )
 )
@@ -110,15 +114,36 @@ chart_2_page <- tabPanel(
   )
 )
 
+# chart 3 page 
+chart_3_page <- tabPanel(
+  "Third Page",
+  titlePanel("Sports Genre Sales by Regions"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(inputId = "select", 
+                  label = h4("Select one of the most popular video game from the TOP 10 game list"), 
+                  choices = table_df$Name, 
+                  selected = 1)
+    ),
+    mainPanel(
+      loadEChartsLibrary(),
+      tags$div(id = "piechart", style = "width:80%; height:400px;"),
+      deliverChart(div_id = "piechart"),
+      tableOutput(outputId = 'table1')
+    )
+  )
+)
+
 ui <- navbarPage(
   theme = bs_theme(bootswatch = "minty",
-                   bg = "#e7feff", fg = "black", primary = "#3f00ff",
+                   bg = "black", fg = "white", primary = "#3f00ff",
                    base_font = font_google("Space Mono"),
                    code_font = font_google("Space Mono")),
   "Video Games Sales",
   Intro_Page,
   chart_1_page,
   chart_2_page,
+  chart_3_page,
   Summ_Page
 )
 
@@ -163,6 +188,19 @@ server <- function(input, output) {
             marker = list(color = "#3f00ff"),
             type = "bar"
     ) %>% layout (yaxis = list(title = 'Total Sales (in millions)'))
+  })
+  
+  # chart 3 
+  renderPieChart(div_id = "piechart", data = data111)
+  output$table1 <- renderTable({
+    return(table_df %>% filter(Name == input$select) %>% select(
+      Name, Platform, Year_of_Release, NA_Sales, EU_Sales, JP_Sales, Other_Sales
+    ) %>% rename("Year of Release" = Year_of_Release,
+                 "North America Sales (in millions)" = NA_Sales,
+                 "Europe Sales (in millions)" = EU_Sales,
+                 "Japan Sales (in millions)" = JP_Sales,
+                 "Other Sales (in millions)" = Other_Sales)
+    )
   })
 }
 
