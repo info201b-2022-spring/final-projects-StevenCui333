@@ -5,10 +5,10 @@ account: stevencui333
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6432565
-bundleId: 5978881
+bundleId: 5978895
 url: https://stevencui333.shinyapps.io/final/
-when: 1654426766.36506
-lastSyncTime: 1654426766.36506
+when: 1654427401.62471
+lastSyncTime: 1654427401.62471
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData|app.html
