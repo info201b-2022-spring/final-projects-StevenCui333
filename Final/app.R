@@ -137,7 +137,7 @@ chart_3_page <- tabPanel(
 
 ui <- navbarPage(
   theme = bs_theme(bootswatch = "minty",
-                   bg = "#e7feff", fg = "black", primary = "#3f00ff",
+                   bg = "black", fg = "white", primary = "#3f00ff",
                    base_font = font_google("Space Mono"),
                    code_font = font_google("Space Mono")),
   "Video Games Sales",
